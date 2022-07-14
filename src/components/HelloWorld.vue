@@ -7,32 +7,29 @@
         data() {
             return {
                 nodeDataArray: [
-                    { key: "A", color: "lightblue"},
-                    { key: "B", color: "lightyellow"},
-                    { key: "C", color: "lightpink"},
-                    { key: "D", color: "lightgreen"},
                 ],
                 linkDataArray: [
-                ]
+                ],
+                diagram: null
             }
         },
         mounted() {
             let $ = go.GraphObject.make;
-
+            
             // Diagram setup
-            let diagram = $(go.Diagram, "diagram", {
+            this.$options.diagram = $(go.Diagram, "diagram", {
                 "grid.visible": true,
                 "undoManager.isEnabled": true,
             });
-            diagram.grid.gridCellSize = new go.Size(20, 20);
-            diagram.grid.opacity = 0.5;
-            diagram.toolManager.draggingTool.isGridSnapEnabled = true;
-            diagram.toolManager.resizingTool.isGridSnapEnabled = true;
+            this.$options.diagram.grid.gridCellSize = new go.Size(20, 20);
+            this.$options.diagram.grid.opacity = 0.5;
+            this.$options.diagram.toolManager.draggingTool.isGridSnapEnabled = true;
+            this.$options.diagram.toolManager.resizingTool.isGridSnapEnabled = true;
 
-            diagram.model = new go.GraphLinksModel(this.nodeDataArray, this.linkDataArray);
+            this.$options.diagram.model = new go.GraphLinksModel(this.nodeDataArray, this.linkDataArray);
 
             // Setup for node (element) and link templates
-            diagram.nodeTemplate = $(
+            this.$options.diagram.nodeTemplate = $(
                 go.Node, "Spot", 
                 {
                     resizable: true, 
@@ -43,8 +40,6 @@
                     go.Shape, "Rectangle", 
                     {
                         fill: "white",
-                        width: 200, 
-                        height: 200, 
                         name: "Sticker",
                     }, 
                     new go.Binding("fill", "color"), 
@@ -101,13 +96,19 @@
                 $(
                     go.TextBlock, "text", 
                     {
-                        margin: 10
+                        margin: 10,
+                        font: "12px sans-serif", 
+                        isMultiline: true, 
+                        editable: true, 
+                        formatting: go.TextBlock.FormatTrim,
+                        overflow: go.TextBlock.OverflowClip,
+                        wrap: go.TextBlock.None,
                     }, 
                     new go.Binding("text", "key")
                 )
             );
 
-            diagram.linkTemplate = $(
+            this.$options.diagram.linkTemplate = $(
                 go.Link,
                 {
                     routing: go.Link.AvoidsNodes, 
@@ -137,11 +138,10 @@
         },
         methods: {
             addSticker() {
-                this.nodeDataArray.push({
+                this.$options.diagram.model.addNodeData({
                     key: "E",
                     color: "lightblue",
                 });
-                console.log(this.nodeDataArray);
             }
         }
     }

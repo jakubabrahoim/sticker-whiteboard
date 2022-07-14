@@ -3,5 +3,6 @@
 </script>
 
 <template>
+    <div id="myDiv"></div>
     <HelloWorld />
 </template>
