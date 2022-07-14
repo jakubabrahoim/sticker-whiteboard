@@ -1,9 +1,13 @@
 <script setup lang="ts">
-    import * as go from 'gojs';
+    import * as go from "gojs";
+    import { OhVueIcon } from "oh-vue-icons";
 </script>
 
 <script lang="ts">
     export default {
+        components: {
+            "v-icon": OhVueIcon
+        },
         data() {
             return {
                 nodeDataArray: [
@@ -47,7 +51,7 @@
                 ),
                 // Left port
                 $(
-                    go.Shape, 'Ellipse',
+                    go.Shape, "Ellipse",
                     {
                         fill: "white",
                         strokeWidth: 1,
@@ -59,7 +63,7 @@
                 ),
                 // Right port
                 $(
-                    go.Shape, 'Ellipse',
+                    go.Shape, "Ellipse",
                     {
                         fill: "white",
                         strokeWidth: 1,
@@ -71,7 +75,7 @@
                 ),
                 // Top port
                 $(
-                    go.Shape, 'Ellipse',
+                    go.Shape, "Ellipse",
                     {
                         fill: "white",
                         strokeWidth: 1,
@@ -83,7 +87,7 @@
                 ),
                 // Bottom port
                 $(
-                    go.Shape, 'Ellipse',
+                    go.Shape, "Ellipse",
                     {
                         fill: "white",
                         strokeWidth: 1,
@@ -139,7 +143,7 @@
         methods: {
             addSticker() {
                 this.$options.diagram.model.addNodeData({
-                    key: "E",
+                    key: "Edit this! ",
                     color: "lightblue",
                 });
             }
@@ -148,12 +152,17 @@
 </script>
 
 <template>
-    <div class='w-full h-screen relative'>
-        <div id='diagram' class='border border-black border-b-0 w-full h-98 bg-white relative'>
+    <div class="w-full h-screen relative">
+        <div id="diagram" class="border border-black border-b-0 w-full h-98 bg-white relative">
         </div>
-        <div class="flex flex-row items-center justify-center h-2 z-[1000]">
-                <button @click="addSticker">
-                    Add
+        <div class="flex flex-row items-center justify-center h-2 border border-gray-50">
+                <button 
+                    class="text-purple-600 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1"
+                    @click="addSticker"
+                    aria-labelledby="addNoteLabel"
+                >
+                    <v-icon name="bi-sticky" scale="1.5"></v-icon>
+                    <span id="addNoteLabel" hidden>Add Sticky Note</span>
                 </button>
         </div>
     </div>
