@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "gojs": "^2.2.12",
+    "oh-vue-icons": "^1.0.0-rc3",
     "vue": "^3.2.37"
   },
   "devDependencies": {

@@ -88,7 +88,7 @@
                         fill: "white",
                         strokeWidth: 1,
                         desiredSize: new go.Size(7, 7), alignment: go.Spot.Bottom,
-                        portId: "top",
+                        portId: "bottom",
                         fromSpot: go.Spot.Bottom, toSpot: go.Spot.Bottom,
                         fromLinkable: true, toLinkable: true,
                     }
@@ -132,9 +132,9 @@
 
             // These are valid according to the API, ts just buggin
             // @ts-ignore
-            diagram.model.linkToPortIdProperty = "toPort";
+            this.$options.diagram.model.linkToPortIdProperty = "toPort";
             // @ts-ignore
-            diagram.model.linkFromPortIdProperty = "fromPort";
+            this.$options.diagram.model.linkFromPortIdProperty = "fromPort";
         },
         methods: {
             addSticker() {
@@ -152,14 +152,9 @@
         <div id='diagram' class='border border-black border-b-0 w-full h-98 bg-white relative'>
         </div>
         <div class="flex flex-row items-center justify-center h-2 z-[1000]">
-                <button @click="addSticker">Sticker</button>
-        </div>
-        <div>
-            <pre>
-                <code class="language-ts">
-                    {{ nodeDataArray }}
-                </code>
-            </pre>
+                <button @click="addSticker">
+                    Add
+                </button>
         </div>
     </div>
 </template>
