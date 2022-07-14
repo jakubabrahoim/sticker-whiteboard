@@ -7,10 +7,10 @@
         data() {
             return {
                 nodeDataArray: [
-                    { key: "A", color: "lightblue", text: "" },
-                    { key: "B", color: "lightyellow", text: ""},
-                    { key: "C", color: "lightpink", text: "" },
-                    { key: "D", color: "lightgreen", text: "" }
+                    { key: "A", color: "lightblue"},
+                    { key: "B", color: "lightyellow"},
+                    { key: "C", color: "lightpink"},
+                    { key: "D", color: "lightgreen"},
                 ],
                 linkDataArray: [
                     { from: "A", to: "B" },
@@ -35,7 +35,7 @@
             diagram.model = new go.GraphLinksModel(this.nodeDataArray, this.linkDataArray);
 
             // Setup for node (element) and link templates
-            diagram.nodeTemplate = $(go.Node, "Auto",
+            diagram.nodeTemplate = $(go.Node, "Auto", {resizable: true, rotatable: true},
                 $(go.Shape, "Rectangle", {fill: "white"}, new go.Binding("fill", "color"), new go.Binding("stroke", "color")),
                 $(go.TextBlock, "text", {margin: 10}, new go.Binding("text", "key"))
             );
@@ -50,7 +50,6 @@
                 this.nodeDataArray.push({
                     key: "E",
                     color: "lightblue",
-                    text: "Epsilon"
                 });
                 console.log(this.nodeDataArray);
             }
