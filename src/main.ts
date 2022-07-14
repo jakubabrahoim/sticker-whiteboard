@@ -3,9 +3,9 @@ import App from './App.vue'
 import './index.css'
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons';
-import { BiSticky } from 'oh-vue-icons/icons';
+import { BiSticky, BiPlusLg, CoMinus } from 'oh-vue-icons/icons';
 
-addIcons(BiSticky);
+addIcons(BiSticky, BiPlusLg, CoMinus);
 
 let app = createApp(App);
 app.component("v-icon", OhVueIcon);
