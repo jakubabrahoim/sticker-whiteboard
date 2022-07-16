@@ -149,7 +149,7 @@
             addSticker() {
                 this.$options.diagram.model.addNodeData({
                     key: "Edit this! ",
-                    color: "lightblue",
+                    color: "#f7ec1b",
                 });
             },
             zoomIn() {
