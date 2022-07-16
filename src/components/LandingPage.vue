@@ -30,7 +30,7 @@
     <div class="bg-[url('https://svgshare.com/i/j8n.svg')] bg-no-repeat bg-cover h-screen w-screen">
         <div class="grid grid-cols-1 h-screen w-screen justify-items-center content-center bg-filter">
             <div class="w-1/4 flex flex-col items-center justify-center">
-                <div class="flex flex-col items-center justify-center mb-2 border border-black rounded-lg px-2 py-2">
+                <div class="flex flex-col items-center justify-center border border-black rounded-lg mb-4 px-2 py-2">
                     <span class="flex flex-row items-center mb-2">
                         <v-icon name="bi-cloud-upload" scale="1.5" class="mr-2"></v-icon> Load Whiteboard
                     </span>

@@ -7,9 +7,9 @@ import LandingPage from './components/LandingPage.vue';
 import Whiteboard from './components/Whiteboard.vue';
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons';
-import { BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort } from 'oh-vue-icons/icons';
+import { BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort, BiEmojiSmile } from 'oh-vue-icons/icons';
 
-addIcons(BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort);
+addIcons(BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort, BiEmojiSmile);
 
 let routes = [
     { path: '/', component: LandingPage },

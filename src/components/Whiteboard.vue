@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import * as go from "gojs";
     import { OhVueIcon } from "oh-vue-icons";
+    import "emoji-picker-element";
 </script>
 
 <script lang="ts">
@@ -15,7 +16,8 @@
                 linkDataArray: [
                 ],
                 diagram: null,
-                currentZoom: 100
+                currentZoom: 100,
+                emojiPicker: 'hidden'
             }
         },
         mounted() {
@@ -27,15 +29,14 @@
                 "undoManager.isEnabled": true,
             });
             this.$options.diagram.grid.gridCellSize = new go.Size(20, 20);
-            this.$options.diagram.grid.opacity = 0.5;
+            this.$options.diagram.grid.opacity = 0.3;
             this.$options.diagram.toolManager.draggingTool.isGridSnapEnabled = true;
             this.$options.diagram.toolManager.resizingTool.isGridSnapEnabled = true;
-
             this.$options.diagram.model = new go.GraphLinksModel(this.nodeDataArray, this.linkDataArray);
-
-            // Setup for node (element) and link templates
-            this.$options.diagram.nodeTemplate = $(
-                go.Node, "Spot", 
+            
+            // Template setup for nodes (stickers/emojis) and links
+            let stickerTemplate = $(
+                go.Node, "Auto", 
                 {
                     resizable: true, 
                     resizeObjectName: "Sticker", 
@@ -46,6 +47,8 @@
                     {
                         fill: "white",
                         name: "Sticker",
+                        width: 200,
+                        height: 200,
                     }, 
                     new go.Binding("fill", "color"), 
                     new go.Binding("stroke", "color")
@@ -105,17 +108,52 @@
                 $(
                     go.TextBlock, "text", 
                     {
-                        margin: 10,
+                        margin: 20,
                         font: "12px sans-serif", 
                         isMultiline: true, 
                         editable: true, 
                         formatting: go.TextBlock.FormatTrim,
                         overflow: go.TextBlock.OverflowClip,
                         wrap: go.TextBlock.None,
+                        alignment: go.Spot.TopLeft, alignmentFocus: go.Spot.TopLeft,
+                        
                     }, 
                     new go.Binding("text", "key")
                 )
             );
+            let emojiTemplate = $(
+                go.Node, "Auto", 
+                { 
+                    resizeObjectName: "Emoji", 
+                    rotatable: true,
+                },
+                $(
+                    go.Shape, "Ellipse", 
+                    {
+                        fill: "white",
+                        name: "Sticker",
+                        opacity: 0,
+                        width: 100,
+                        height: 100,
+                    }, 
+                    new go.Binding("fill", "color"), 
+                    new go.Binding("stroke", "color")
+                ), 
+                $(
+                    go.TextBlock, "text", 
+                    {
+                        margin: 20,
+                        font: "50px sans-serif"
+                        
+                    }, 
+                    new go.Binding("text", "key")
+                )
+            );
+
+            let templateMap = new go.Map();
+            templateMap.add("sticker", stickerTemplate);
+            templateMap.add("emoji", emojiTemplate);
+            this.$options.diagram.nodeTemplateMap = templateMap;
 
             this.$options.diagram.linkTemplate = $(
                 go.Link,
@@ -149,12 +187,26 @@
             if(this.$route.params.data != undefined) {
                 this.loadWhiteboard(this.$route.params.data);
             }
+
+            // Event listener for emojis
+            document.querySelector('emoji-picker')?.addEventListener('emoji-click', (event) => {
+                console.log(event.detail.unicode);
+                
+                // Add emoji to board
+                this.$options.diagram.model.addNodeData({
+                    key: event.detail.unicode,
+                    color: "lightblue",
+                    category: "emoji",
+                });
+            });
+
         },
         methods: {
             addSticker() {
                 this.$options.diagram.model.addNodeData({
                     key: "Edit this! ",
                     color: "#f7ec1b",
+                    category: "sticker",
                 });
             },
             zoomIn() {
@@ -181,18 +233,21 @@
             loadWhiteboard(data: any) {
                 this.$options.diagram.model = go.Model.fromJson(JSON.parse(data));
             },
+            showEmojiPicker() {
+                this.emojiPicker === 'hidden' ? this.emojiPicker = 'visible' : this.emojiPicker = 'hidden';
+            }
         }
     }
 </script>
 
 <template>
-    <div class="w-full h-screen relative">
+    <div class="w-full h-screen">
         <div id="diagram" class="border border-black border-b-0 w-full h-98 bg-white relative">
         </div>
         <div class="grid grid-cols-3 items-center justify-items-center h-2 border border-gray-50">
             <div class="justify-self-start ml-2">
                 <button 
-                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2 justify-self-start"
+                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="saveWhiteboard"
                     aria-labelledby="addWhiteboardLabel"
                 >
@@ -201,15 +256,24 @@
                 </button>
             </div>
 
-            <div>
+            <div class="flex flex-row">
                 <button 
-                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2 justify-self-start"
+                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="addSticker"
                     aria-labelledby="addNoteLabel"
                 >
                     <v-icon name="bi-sticky" scale="1.5"></v-icon>
                     <span id="addNoteLabel" hidden>Add Sticky Note</span>
                 </button>
+                <button 
+                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
+                    @click="showEmojiPicker"
+                    aria-labelledby="addEmojiLabel"
+                >
+                    <v-icon name="bi-emoji-smile" scale="1.5"></v-icon>
+                    <span id="addEmojiLabel" hidden>Add Emoji</span>
+                </button>
+                <emoji-picker class="light" v-show="emojiPicker === 'visible'"></emoji-picker>
             </div>
                 
             <div class="justify-self-end flex items-center border borde-gray-300 rounded-lg py-1 mr-2">
