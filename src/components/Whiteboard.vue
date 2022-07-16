@@ -170,7 +170,19 @@
     <div class="w-full h-screen relative">
         <div id="diagram" class="border border-black border-b-0 w-full h-98 bg-white relative">
         </div>
-        <div class="flex flex-row items-center justify-center h-2 border border-gray-50">
+        <div class="grid grid-cols-3 items-center justify-items-center h-2 border border-gray-50">
+            <div class="justify-self-start ml-2">
+                <button 
+                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2 justify-self-start"
+                    @click=""
+                    aria-labelledby="addWhiteboardLabel"
+                >
+                    <v-icon name="co-save" scale="1.5"></v-icon>
+                    <span id="saveWhiteboardLabel" hidden>Save Whiteboard</span>
+                </button>
+            </div>
+
+            <div>
                 <button 
                     class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="addSticker"
@@ -179,25 +191,26 @@
                     <v-icon name="bi-sticky" scale="1.5"></v-icon>
                     <span id="addNoteLabel" hidden>Add Sticky Note</span>
                 </button>
-
-                <div class="flex items-center border borde-gray-300 rounded-lg py-1">
-                    <button
-                        class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
-                        @click="zoomOut"
-                        aria-labelledby="zoomOutLabel"
-                    >
-                        <v-icon name="co-minus" scale="1.5"></v-icon>
-                        <span id="zoomOutLabel" hidden>Zoom Out</span>
-                    </button>
-                    <span class="text-purple-500">{{currentZoom}} %</span>
-                    <button 
-                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
-                    @click="zoomIn"
-                    aria-labelledby="zoomInLabel"
-                    >
-                        <v-icon name="bi-plus-lg" scale="1.5"></v-icon>
-                        <span id="zoomInLabel" hidden>Zoom In</span>
-                    </button>
+            </div>
+                
+            <div class="justify-self-end flex items-center border borde-gray-300 rounded-lg py-1 mr-2">
+                <button
+                class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
+                @click="zoomOut"
+                aria-labelledby="zoomOutLabel"
+                >
+                    <v-icon name="co-minus" scale="1.5"></v-icon>
+                    <span id="zoomOutLabel" hidden>Zoom Out</span>
+                </button>
+                <span class="text-purple-500 hover:cursor-default">{{currentZoom}} %</span>
+                <button 
+                class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
+                @click="zoomIn"
+                aria-labelledby="zoomInLabel"
+                >
+                    <v-icon name="bi-plus-lg" scale="1.5"></v-icon>
+                    <span id="zoomInLabel" hidden>Zoom In</span>
+                </button>
                 </div>
         </div>
     </div>

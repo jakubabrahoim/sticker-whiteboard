@@ -1,8 +1,7 @@
 <script setup lang="ts">
-    import HelloWorld from './components/HelloWorld.vue';
+    import Whiteboard from './components/Whiteboard.vue';
 </script>
 
 <template>
-    <div id="myDiv"></div>
-    <HelloWorld />
+    <Whiteboard />
 </template>
