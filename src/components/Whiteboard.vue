@@ -219,6 +219,9 @@
                 this.$options.diagram.commandHandler.decreaseZoom();
                 this.currentZoom -= 5;
             },
+            fullScreen() {
+                (this.$refs.container as any).requestFullscreen();
+            },
             saveWhiteboard() {
                 let data = this.$options.diagram.model.toJson();
                 
@@ -241,10 +244,10 @@
 </script>
 
 <template>
-    <div class="w-full h-screen">
+    <div class="w-full h-screen" ref="container">
         <div id="diagram" class="border border-black border-b-0 w-full h-98 bg-white relative">
         </div>
-        <div class="grid grid-cols-3 items-center justify-items-center h-2 border border-gray-50">
+        <div class="grid grid-cols-3 items-center justify-items-center h-2 bg-white">
             <div class="justify-self-start border borde-gray-300 rounded-lg py-1 ml-2">
                 <button 
                     class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
@@ -285,7 +288,9 @@
                     <v-icon name="co-minus" scale="1.5"></v-icon>
                     <span id="zoomOutLabel" hidden>Zoom Out</span>
                 </button>
+
                 <span class="text-purple-500 hover:cursor-default">{{currentZoom}} %</span>
+
                 <button 
                 class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
                 @click="zoomIn"
@@ -294,7 +299,16 @@
                     <v-icon name="bi-plus-lg" scale="1.5"></v-icon>
                     <span id="zoomInLabel" hidden>Zoom In</span>
                 </button>
-                </div>
+
+                <button 
+                class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
+                @click="fullScreen"
+                aria-labelledby="fullscreenLabel"
+                >
+                    <v-icon name="co-fullscreen" scale="1.25"></v-icon>
+                    <span id="fullscreenLabel" hidden>Zoom In</span>
+                </button>
+            </div>
         </div>
     </div>
 </template>
