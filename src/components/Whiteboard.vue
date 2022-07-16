@@ -245,7 +245,7 @@
         <div id="diagram" class="border border-black border-b-0 w-full h-98 bg-white relative">
         </div>
         <div class="grid grid-cols-3 items-center justify-items-center h-2 border border-gray-50">
-            <div class="justify-self-start ml-2">
+            <div class="justify-self-start border borde-gray-300 rounded-lg py-1 ml-2">
                 <button 
                     class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="saveWhiteboard"
@@ -256,7 +256,7 @@
                 </button>
             </div>
 
-            <div class="flex flex-row">
+            <div class="flex flex-row items-center border borde-gray-300 rounded-lg py-1">
                 <button 
                     class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="addSticker"
@@ -276,7 +276,7 @@
                 <emoji-picker class="light" v-show="emojiPicker === 'visible'"></emoji-picker>
             </div>
                 
-            <div class="justify-self-end flex items-center border borde-gray-300 rounded-lg py-1 mr-2">
+            <div class="justify-self-end flex flex-row items-center border borde-gray-300 rounded-lg py-1 mr-2">
                 <button
                 class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
                 @click="zoomOut"
