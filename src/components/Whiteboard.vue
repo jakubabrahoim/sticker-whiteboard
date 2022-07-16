@@ -162,6 +162,17 @@
                 this.$options.diagram.commandHandler.decreaseZoom();
                 this.currentZoom -= 5;
             },
+            saveWhiteboard() {
+                let data = this.$options.diagram.model.toJson();
+                
+                let fileUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(data);
+                let fileName: string = "whiteboard.json";
+
+                let downloadLink: HTMLAnchorElement = document.createElement("a");
+                downloadLink.setAttribute("href", fileUri);
+                downloadLink.setAttribute("download", fileName);
+                downloadLink.click();
+            }
         }
     }
 </script>
@@ -174,7 +185,7 @@
             <div class="justify-self-start ml-2">
                 <button 
                     class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2 justify-self-start"
-                    @click=""
+                    @click="saveWhiteboard"
                     aria-labelledby="addWhiteboardLabel"
                 >
                     <v-icon name="co-save" scale="1.5"></v-icon>
