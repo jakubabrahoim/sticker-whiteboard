@@ -144,6 +144,11 @@
             this.$options.diagram.model.linkToPortIdProperty = "toPort";
             // @ts-ignore
             this.$options.diagram.model.linkFromPortIdProperty = "fromPort";
+
+            // Load diagram if data was sent to this url
+            if(this.$route.params.data != undefined) {
+                this.loadWhiteboard(this.$route.params.data);
+            }
         },
         methods: {
             addSticker() {
@@ -172,7 +177,10 @@
                 downloadLink.setAttribute("href", fileUri);
                 downloadLink.setAttribute("download", fileName);
                 downloadLink.click();
-            }
+            },
+            loadWhiteboard(data: any) {
+                this.$options.diagram.model = go.Model.fromJson(JSON.parse(data));
+            },
         }
     }
 </script>

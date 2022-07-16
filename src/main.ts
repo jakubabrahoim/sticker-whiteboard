@@ -13,7 +13,7 @@ addIcons(BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort);
 
 let routes = [
     { path: '/', component: LandingPage },
-    { path: '/whiteboard', component: Whiteboard }
+    { path: '/whiteboard', name:"whiteboard", component: Whiteboard, props: true }
 ]
 
 let router = createRouter({
