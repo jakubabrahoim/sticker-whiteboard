@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "emoji-picker-element": "^1.12.1",
+    "firebase": "^9.9.0",
     "gojs": "^2.2.12",
     "oh-vue-icons": "^1.0.0-rc3",
     "vue": "^3.2.37",
