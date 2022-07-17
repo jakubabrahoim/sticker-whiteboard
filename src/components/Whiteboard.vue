@@ -109,11 +109,11 @@
                     go.TextBlock, "text", 
                     {
                         margin: 20,
-                        font: "12px sans-serif", 
+                        font: "14px sans-serif", 
                         isMultiline: true, 
                         editable: true, 
                         formatting: go.TextBlock.FormatTrim,
-                        overflow: go.TextBlock.OverflowClip,
+                        overflow: go.TextBlock.OverflowEllipsis,
                         wrap: go.TextBlock.None,
                         alignment: go.Spot.TopLeft, alignmentFocus: go.Spot.TopLeft,
                         
@@ -209,20 +209,21 @@
                     category: "sticker",
                 });
             },
-            zoomIn() {
-                if(this.currentZoom + 5 > 200) return;
-                this.$options.diagram.commandHandler.increaseZoom();
-                this.currentZoom += 5;
-            },
-            zoomOut() {
-                if(this.currentZoom - 5 < 0) return;
-                this.$options.diagram.commandHandler.decreaseZoom();
-                this.currentZoom -= 5;
+            zoom(direction: string) {
+                if (direction === "in") {
+                    if(this.currentZoom + 5 > 200) return;
+                    this.$options.diagram.commandHandler.increaseZoom();
+                    this.currentZoom += 5;
+                } else if (direction === "out") {
+                    if(this.currentZoom - 5 < 0) return;
+                    this.$options.diagram.commandHandler.decreaseZoom();
+                    this.currentZoom -= 5;
+                }
             },
             fullScreen() {
                 (this.$refs.container as any).requestFullscreen();
             },
-            saveWhiteboard() {
+            saveWhiteboardJSON() {
                 let data = this.$options.diagram.model.toJson();
                 
                 let fileUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(data);
@@ -232,6 +233,23 @@
                 downloadLink.setAttribute("href", fileUri);
                 downloadLink.setAttribute("download", fileName);
                 downloadLink.click();
+            },
+            saveWhiteBoardPNG() {
+                let imageData =  this.$options.diagram.makeImageData({
+                    scale: 1,
+                    type: "image/png",
+                    showGrid: true,
+                    returnType: "blob",
+                    callback: (blob: any) => {
+                        let fileUri = URL.createObjectURL(blob);
+                        let fileName: string = "whiteboard.png";
+
+                        let downloadLink: HTMLAnchorElement = document.createElement("a");
+                        downloadLink.setAttribute("href", fileUri);
+                        downloadLink.setAttribute("download", fileName);
+                        downloadLink.click();
+                    }
+                });
             },
             loadWhiteboard(data: any) {
                 this.$options.diagram.model = go.Model.fromJson(JSON.parse(data));
@@ -251,11 +269,20 @@
             <div class="justify-self-start border borde-gray-300 rounded-lg py-1 ml-2">
                 <button 
                     class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
-                    @click="saveWhiteboard"
-                    aria-labelledby="addWhiteboardLabel"
+                    @click="saveWhiteboardJSON"
+                    aria-labelledby="saveWhiteboardLabel"
                 >
                     <v-icon name="co-save" scale="1.5"></v-icon>
-                    <span id="saveWhiteboardLabel" hidden>Save Whiteboard</span>
+                    <span id="saveWhiteboardLabel" hidden>Save Whiteboard JSON</span>
+                </button>
+
+                <button 
+                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
+                    @click="saveWhiteBoardPNG"
+                    aria-labelledby="addWhiteboardLabel2"
+                >
+                    <v-icon name="bi-card-image" scale="1.5"></v-icon>
+                    <span id="saveWhiteboardLabel2" hidden>Save Whiteboard PNG</span>
                 </button>
             </div>
 
@@ -282,7 +309,7 @@
             <div class="justify-self-end flex flex-row items-center border borde-gray-300 rounded-lg py-1 mr-2">
                 <button
                 class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
-                @click="zoomOut"
+                @click="zoom('out')"
                 aria-labelledby="zoomOutLabel"
                 >
                     <v-icon name="co-minus" scale="1.5"></v-icon>
@@ -293,7 +320,7 @@
 
                 <button 
                 class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
-                @click="zoomIn"
+                @click="zoom('in')"
                 aria-labelledby="zoomInLabel"
                 >
                     <v-icon name="bi-plus-lg" scale="1.5"></v-icon>

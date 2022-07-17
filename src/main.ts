@@ -10,9 +10,9 @@ import LandingPage from './components/LandingPage.vue';
 import Whiteboard from './components/Whiteboard.vue';
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons';
-import { BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort, BiEmojiSmile, CoFullscreen } from 'oh-vue-icons/icons';
+import { BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort, BiEmojiSmile, CoFullscreen, BiCardImage } from 'oh-vue-icons/icons';
 
-addIcons(BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort, BiEmojiSmile, CoFullscreen);
+addIcons(BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort, BiEmojiSmile, CoFullscreen, BiCardImage);
 
 const firebaseConfig = {
     apiKey: "AIzaSyCjkFl06qXGER6Q3aYGsz6i5VcmsoI3IRw",
