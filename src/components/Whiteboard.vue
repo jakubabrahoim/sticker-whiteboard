@@ -118,7 +118,7 @@
                         alignment: go.Spot.TopLeft, alignmentFocus: go.Spot.TopLeft,
                         
                     }, 
-                    new go.Binding("text", "key")
+                    new go.Binding("text", "text")
                 )
             );
             let emojiTemplate = $(
@@ -204,7 +204,8 @@
         methods: {
             addSticker() {
                 this.$options.diagram.model.addNodeData({
-                    key: "Edit this! ",
+                    key: "",
+                    text: "Edit me! 😎",
                     color: "#f7ec1b",
                     category: "sticker",
                 });
@@ -265,8 +266,9 @@
     <div class="w-full h-screen" ref="container">
         <div id="diagram" class="border border-black border-b-0 w-full h-98 bg-white relative">
         </div>
-        <div class="grid grid-cols-3 items-center justify-items-center h-2 bg-white">
-            <div class="justify-self-start border borde-gray-300 rounded-lg py-1 ml-2">
+        <div class="grid grid-cols-1 sm:grid-cols-3 items-center justify-items-center h-2 bg-white">
+            <!-- Export section -->
+            <div class="justify-self-center sm:justify-self-start border borde-gray-300 rounded-lg py-1 mb-2 sm:mb-0 sm:ml-2">
                 <button 
                     class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="saveWhiteboardJSON"
@@ -286,6 +288,7 @@
                 </button>
             </div>
 
+            <!-- Add to board stuff -->
             <div class="flex flex-row items-center border borde-gray-300 rounded-lg py-1">
                 <button 
                     class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
@@ -303,10 +306,11 @@
                     <v-icon name="bi-emoji-smile" scale="1.5"></v-icon>
                     <span id="addEmojiLabel" hidden>Add Emoji</span>
                 </button>
-                <emoji-picker class="light" v-show="emojiPicker === 'visible'"></emoji-picker>
+                <emoji-picker class="light w-[300px] h-[300px]" v-show="emojiPicker === 'visible'"></emoji-picker>
             </div>
-                
-            <div class="justify-self-end flex flex-row items-center border borde-gray-300 rounded-lg py-1 mr-2">
+            
+            <!-- Zoom section -->
+            <div class="justify-self-center sm:justify-self-end flex flex-row items-center border borde-gray-300 rounded-lg py-1 mt-2 sm:my-0 sm:mr-2">
                 <button
                 class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
                 @click="zoom('out')"

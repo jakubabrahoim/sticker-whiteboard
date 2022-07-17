@@ -29,6 +29,9 @@
 <template>
     <div class="bg-[url('https://svgshare.com/i/j8n.svg')] bg-no-repeat bg-cover h-screen w-screen">
         <div class="grid grid-cols-1 h-screen w-screen justify-items-center content-center bg-filter">
+            <div class="mb-4">
+                <h1 class="font-medium text-2xl">Hello there 👋🏽</h1>
+            </div>
             <div class="w-1/4 flex flex-col items-center justify-center">
                 <div class="flex flex-col items-center justify-center border border-black rounded-lg mb-4 px-2 py-2">
                     <span class="flex flex-row items-center mb-2">
@@ -42,7 +45,7 @@
                     />
                 </div>
                 <button 
-                    class="flex justify-center items-center px-2 py-2 border border-gray-700 rounded-lg"
+                    class="flex justify-center items-center px-2 py-2 border border-gray-700 rounded-lg hover:bg-yellow-200"
                     @click="newBoard"
                 >
                     <v-icon name="bi-arrow-right-short" scale="1.5" class="mr-2"></v-icon> New Whiteboard
