@@ -199,6 +199,10 @@
                 });
             });
 
+            window.onbeforeunload = () => {
+                return "Are you sure you want to leave?";
+            }
+
         },
         methods: {
             addSticker() {
