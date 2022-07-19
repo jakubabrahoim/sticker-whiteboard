@@ -17,7 +17,8 @@
                 ],
                 diagram: null,
                 currentZoom: 100,
-                emojiPicker: 'hidden'
+                emojiPicker: "hidden",
+                screen: "windowed"
             }
         },
         mounted() {
@@ -190,8 +191,6 @@
 
             // Event listener for emojis
             document.querySelector('emoji-picker')?.addEventListener('emoji-click', (event) => {
-                console.log(event.detail.unicode);
-                
                 // Add emoji to board
                 this.$options.diagram.model.addNodeData({
                     key: event.detail.unicode,
@@ -199,6 +198,10 @@
                     category: "emoji",
                 });
             });
+
+            window.onbeforeunload = () => {
+                return "Are you sure you want to leave?";
+            }
 
         },
         methods: {
@@ -222,7 +225,13 @@
                 }
             },
             fullScreen() {
-                (this.$refs.container as any).requestFullscreen();
+                if(this.screen === "windowed") {
+                    (this.$refs.container as any).requestFullscreen();
+                    this.screen = "fullscreen";
+                } else if (this.screen === "fullscreen") {
+                    document.exitFullscreen();
+                    this.screen = "windowed";
+                }
             },
             saveWhiteboardJSON() {
                 let data = this.$options.diagram.model.toJson();
@@ -312,9 +321,9 @@
             <!-- Zoom section -->
             <div class="justify-self-center sm:justify-self-end flex flex-row items-center border borde-gray-300 rounded-lg py-1 mt-2 sm:my-0 sm:mr-2">
                 <button
-                class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
-                @click="zoom('out')"
-                aria-labelledby="zoomOutLabel"
+                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
+                    @click="zoom('out')"
+                    aria-labelledby="zoomOutLabel"
                 >
                     <v-icon name="co-minus" scale="1.5"></v-icon>
                     <span id="zoomOutLabel" hidden>Zoom Out</span>
@@ -323,18 +332,18 @@
                 <span class="text-purple-500 hover:cursor-default">{{currentZoom}} %</span>
 
                 <button 
-                class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
-                @click="zoom('in')"
-                aria-labelledby="zoomInLabel"
+                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
+                    @click="zoom('in')"
+                    aria-labelledby="zoomInLabel"
                 >
                     <v-icon name="bi-plus-lg" scale="1.5"></v-icon>
                     <span id="zoomInLabel" hidden>Zoom In</span>
                 </button>
 
                 <button 
-                class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
-                @click="fullScreen"
-                aria-labelledby="fullscreenLabel"
+                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
+                    @click="fullScreen"
+                    aria-labelledby="fullscreenLabel"
                 >
                     <v-icon name="co-fullscreen" scale="1.25"></v-icon>
                     <span id="fullscreenLabel" hidden>Zoom In</span>
