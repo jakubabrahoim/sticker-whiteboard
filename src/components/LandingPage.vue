@@ -1,6 +1,8 @@
 <script setup lang="ts">
     import { OhVueIcon } from "oh-vue-icons";
-    import Background from '../assets/liquid-cheese.svg'
+    import Landing from "../views/LandingView.vue";
+    import Whiteboard from "../views/WhiteboardView.vue";
+    import UML from "../views/UMLView.vue";
 </script>
 
 <script lang="ts">
@@ -8,19 +10,14 @@
         components: {
             "v-icon": OhVueIcon,
         },
+        data() {
+            return {
+                currentLayout: "landing"
+            }
+        },
         methods: {
-            newBoard() {
-                this.$router.push({ path: '/whiteboard' });
-            },
-            handleUpload(event: any) {
-                if(event.target.files[0].type !== 'application/json') return;
-                let fileReader = new FileReader();
-                fileReader.readAsText(event.target.files[0]);
-
-                fileReader.onload = () => {
-                    let data = fileReader.result as string;
-                    this.$router.push({ name: 'whiteboard', params: { data: data } });
-                }
+            toggleLayout(newLayout: string) {
+                this.currentLayout = newLayout;
             }
         }
     }
@@ -28,30 +25,9 @@
 
 <template>
     <div class="bg-[url('https://svgshare.com/i/j8n.svg')] bg-no-repeat bg-cover h-screen w-screen">
-        <div class="grid grid-cols-1 h-screen w-screen justify-items-center content-center bg-filter">
-            <div class="mb-4">
-                <h1 class="font-medium text-2xl">Hello there 👋🏽</h1>
-            </div>
-            <div class="w-1/4 flex flex-col items-center justify-center">
-                <div class="flex flex-col items-center justify-center border border-black rounded-lg mb-4 px-2 py-2">
-                    <span class="flex flex-row items-center mb-2">
-                        <v-icon name="bi-cloud-upload" scale="1.5" class="mr-2"></v-icon> Load Whiteboard
-                    </span>
-                    <input 
-                        class="w-[100px] file:rounded-lg file:border-none file:px-2 file:py-1 file:bg-yellow-100 file:hover:bg-yellow-200 file:hover:cursor-pointer" 
-                        id="whiteboardLoad" 
-                        type="file" 
-                        @change="handleUpload"
-                    />
-                </div>
-                <button 
-                    class="flex justify-center items-center px-2 py-2 border border-gray-700 rounded-lg hover:bg-yellow-200"
-                    @click="newBoard"
-                >
-                    <v-icon name="bi-arrow-right-short" scale="1.5" class="mr-2"></v-icon> New Whiteboard
-                </button>
-            </div>
-        </div>
+        <Landing v-if="currentLayout === 'landing'" @toggleLayoutEvent="toggleLayout"></Landing>
+        <Whiteboard v-if="currentLayout === 'whiteboardSelect'" @toggleLayoutEvent="toggleLayout"></Whiteboard>
+        <UML v-if="currentLayout === 'umlSelect'" @toggleLayoutEvent="toggleLayout"></UML>
     </div>
 </template>
 

@@ -304,6 +304,7 @@
                     class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="addSticker"
                     aria-labelledby="addNoteLabel"
+                    hidden
                 >
                     <v-icon name="bi-sticky" scale="1.5"></v-icon>
                     <span id="addNoteLabel" hidden>Add Sticky Note</span>
@@ -312,6 +313,7 @@
                     class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="showEmojiPicker"
                     aria-labelledby="addEmojiLabel"
+                    hidden
                 >
                     <v-icon name="bi-emoji-smile" scale="1.5"></v-icon>
                     <span id="addEmojiLabel" hidden>Add Emoji</span>
