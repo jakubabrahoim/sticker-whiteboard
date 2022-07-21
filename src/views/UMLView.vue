@@ -5,7 +5,7 @@
     export default {
         methods: {
             newBoard() {
-                //this.$router.push({ path: '/whiteboard' });
+                this.$router.push({ path: '/uml' });
             },
             handleUpload(event: any) {
                 if(event.target.files[0].type !== 'application/json') return;
@@ -14,7 +14,7 @@
 
                 fileReader.onload = () => {
                     let data = fileReader.result as string;
-                    //this.$router.push({ name: 'whiteboard', params: { data: data } });
+                    this.$router.push({ name: 'uml', params: { data: data } });
                 }
             },
             goBack() {

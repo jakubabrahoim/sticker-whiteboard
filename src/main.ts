@@ -8,6 +8,7 @@ import { getAnalytics } from "firebase/analytics";
 
 import LandingPage from './components/LandingPage.vue';
 import Whiteboard from './components/Whiteboard.vue';
+import UML from './components/UML.vue';
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons';
 import { BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort, BiEmojiSmile, CoFullscreen, BiCardImage } from 'oh-vue-icons/icons';
@@ -29,8 +30,9 @@ const firebaseConfig = {
   const analytics = getAnalytics(firebaseApp);
 
 let routes = [
-    { path: '/', component: LandingPage },
-    { path: '/whiteboard', name:"whiteboard", component: Whiteboard, props: true }
+    { path: "/", component: LandingPage },
+    { path: "/whiteboard", name:"whiteboard", component: Whiteboard, props: true },
+    { path: "/uml", name: "uml", component: UML, props: true}
 ]
 
 let router = createRouter({

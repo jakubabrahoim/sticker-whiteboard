@@ -1,9 +1,8 @@
 <script setup lang="ts">
     import { OhVueIcon } from "oh-vue-icons";
-    import Background from '../assets/liquid-cheese.svg';
-    import Landing from "../views/Landing.vue";
-    import Whiteboard from "../views/Whiteboard.vue";
-    import UML from "../views/UML.vue";
+    import Landing from "../views/LandingView.vue";
+    import Whiteboard from "../views/WhiteboardView.vue";
+    import UML from "../views/UMLView.vue";
 </script>
 
 <script lang="ts">
