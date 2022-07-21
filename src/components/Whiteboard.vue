@@ -199,6 +199,7 @@
                 });
             });
 
+            // Alert before refresh
             window.onbeforeunload = () => {
                 return "Are you sure you want to leave?";
             }
@@ -279,7 +280,7 @@
             <!-- Export section -->
             <div class="justify-self-center sm:justify-self-start border borde-gray-300 rounded-lg py-1 mb-2 sm:mb-0 sm:ml-2">
                 <button 
-                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
+                    class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="saveWhiteboardJSON"
                     aria-labelledby="saveWhiteboardLabel"
                 >
@@ -288,7 +289,7 @@
                 </button>
 
                 <button 
-                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
+                    class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="saveWhiteBoardPNG"
                     aria-labelledby="addWhiteboardLabel2"
                 >
@@ -300,7 +301,7 @@
             <!-- Add to board stuff -->
             <div class="flex flex-row items-center border borde-gray-300 rounded-lg py-1">
                 <button 
-                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
+                    class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="addSticker"
                     aria-labelledby="addNoteLabel"
                 >
@@ -308,7 +309,7 @@
                     <span id="addNoteLabel" hidden>Add Sticky Note</span>
                 </button>
                 <button 
-                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
+                    class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="showEmojiPicker"
                     aria-labelledby="addEmojiLabel"
                 >
@@ -321,7 +322,7 @@
             <!-- Zoom section -->
             <div class="justify-self-center sm:justify-self-end flex flex-row items-center border borde-gray-300 rounded-lg py-1 mt-2 sm:my-0 sm:mr-2">
                 <button
-                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
+                    class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
                     @click="zoom('out')"
                     aria-labelledby="zoomOutLabel"
                 >
@@ -329,10 +330,10 @@
                     <span id="zoomOutLabel" hidden>Zoom Out</span>
                 </button>
 
-                <span class="text-purple-500 hover:cursor-default">{{currentZoom}} %</span>
+                <span class="text-gray-500 hover:cursor-default">{{currentZoom}} %</span>
 
                 <button 
-                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
+                    class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
                     @click="zoom('in')"
                     aria-labelledby="zoomInLabel"
                 >
@@ -341,7 +342,7 @@
                 </button>
 
                 <button 
-                    class="text-purple-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
+                    class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
                     @click="fullScreen"
                     aria-labelledby="fullscreenLabel"
                 >

@@ -8,6 +8,11 @@
         components: {
             "v-icon": OhVueIcon,
         },
+        data() {
+            return {
+                currentLayout: "landing"
+            }
+        },
         methods: {
             newBoard() {
                 this.$router.push({ path: '/whiteboard' });
@@ -28,7 +33,7 @@
 
 <template>
     <div class="bg-[url('https://svgshare.com/i/j8n.svg')] bg-no-repeat bg-cover h-screen w-screen">
-        <div class="grid grid-cols-1 h-screen w-screen justify-items-center content-center bg-filter">
+        <div v-if="currentLayout === 'landing'" class="grid grid-cols-1 h-screen w-screen justify-items-center content-center bg-filter">
             <div class="mb-4">
                 <h1 class="font-medium text-2xl">Hello there 👋🏽</h1>
             </div>
