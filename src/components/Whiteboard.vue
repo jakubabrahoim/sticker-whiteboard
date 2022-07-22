@@ -152,10 +152,34 @@
                     new go.Binding("text", "key")
                 )
             );
+            let textBoxTemplate = $(
+                go.Node, "Auto", 
+                { 
+                    resizeObjectName: "Emoji", 
+                    rotatable: true,
+                    resizable: true,
+                }, 
+                $(
+                    go.TextBlock, "text", 
+                    {
+                        margin: 20,
+                        font: "16px sans-serif", 
+                        isMultiline: true, 
+                        editable: true, 
+                        formatting: go.TextBlock.FormatTrim,
+                        overflow: go.TextBlock.OverflowEllipsis,
+                        wrap: go.TextBlock.None,
+                        textAlign: "center",
+                        verticalAlignment: go.Spot.Center
+                    }, 
+                    new go.Binding("text", "text")
+                )
+            )
 
             let templateMap = new go.Map();
             templateMap.add("sticker", stickerTemplate);
             templateMap.add("emoji", emojiTemplate);
+            templateMap.add("text", textBoxTemplate);
             this.$options.diagram.nodeTemplateMap = templateMap;
 
             this.$options.diagram.linkTemplate = $(
@@ -214,6 +238,13 @@
                     text: "Edit me! 😎",
                     color: "#f7ec1b",
                     category: "sticker",
+                });
+            },
+            addText() {
+                this.$options.diagram.model.addNodeData({
+                    key: "",
+                    text: "Type here!",
+                    category: "text"
                 });
             },
             zoom(direction: string) {
@@ -319,6 +350,14 @@
                     <span id="addEmojiLabel" hidden>Add Emoji</span>
                 </button>
                 <emoji-picker class="light w-[300px] h-[300px]" v-show="emojiPicker === 'visible'"></emoji-picker>
+                <button 
+                    class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
+                    @click="addText"
+                    aria-labelledby="addEmojiLabel"
+                >
+                    <v-icon name="ri-text" scale="1.5"></v-icon>
+                    <span id="addEmojiLabel" hidden>Add Text</span>
+                </button>
             </div>
             
             <!-- Zoom section -->

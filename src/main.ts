@@ -11,9 +11,9 @@ import Whiteboard from './components/Whiteboard.vue';
 import UML from './components/UML.vue';
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons';
-import { BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort, BiEmojiSmile, CoFullscreen, BiCardImage } from 'oh-vue-icons/icons';
+import { BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort, BiEmojiSmile, CoFullscreen, BiCardImage, RiText } from 'oh-vue-icons/icons';
 
-addIcons(BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort, BiEmojiSmile, CoFullscreen, BiCardImage);
+addIcons(BiSticky, BiPlusLg, CoMinus, CoSave, BiCloudUpload, BiArrowRightShort, BiEmojiSmile, CoFullscreen, BiCardImage, RiText);
 
 const firebaseConfig = {
     apiKey: "AIzaSyCjkFl06qXGER6Q3aYGsz6i5VcmsoI3IRw",
