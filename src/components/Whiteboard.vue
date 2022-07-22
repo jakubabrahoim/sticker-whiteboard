@@ -42,6 +42,8 @@
                     resizable: true, 
                     resizeObjectName: "Sticker", 
                     rotatable: true,
+                    isShadowed: true,
+                    shadowBlur: 7,
                 },
                 $(
                     go.Shape, "Rectangle", 
