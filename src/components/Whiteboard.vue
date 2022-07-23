@@ -238,6 +238,7 @@
                 return "Are you sure you want to leave?";
             }
 
+            // Display/hide ports on mouse enter/leave
             let displayPorts = (node: any, show: any): void => {
                 node.ports.each((port: any) => {
                     if(port.portId !== "") {
@@ -246,6 +247,17 @@
                 });
             }
 
+            // Zoom with I/O keys
+            document.addEventListener('keydown', (event: any) => {
+                if(event.keyCode == 73) {
+                    
+                    this.zoom("in");
+                }
+                if(event.keyCode == 79) {
+                    
+                    this.zoom("out");
+                }
+            });
         },
         methods: {
             addSticker() {
