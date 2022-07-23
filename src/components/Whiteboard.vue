@@ -60,7 +60,8 @@
                 $(
                     go.Shape, "Ellipse",
                     {
-                        fill: "white",
+                        fill: null,
+                        stroke: null,
                         strokeWidth: 1,
                         desiredSize: new go.Size(7, 7), alignment: go.Spot.Left,
                         portId: "left",
@@ -73,7 +74,8 @@
                 $(
                     go.Shape, "Ellipse",
                     {
-                        fill: "white",
+                        fill: null,
+                        stroke: null,
                         strokeWidth: 1,
                         desiredSize: new go.Size(7, 7), alignment: go.Spot.Right,
                         portId: "right",
@@ -86,7 +88,8 @@
                 $(
                     go.Shape, "Ellipse",
                     {
-                        fill: "white",
+                        fill: null,
+                        stroke: null,
                         strokeWidth: 1,
                         desiredSize: new go.Size(7, 7), alignment: go.Spot.Top,
                         portId: "top",
@@ -99,7 +102,8 @@
                 $(
                     go.Shape, "Ellipse",
                     {
-                        fill: "white",
+                        fill: null,
+                        stroke: null,
                         strokeWidth: 1,
                         desiredSize: new go.Size(7, 7), alignment: go.Spot.Bottom,
                         portId: "bottom",
@@ -122,7 +126,11 @@
                         
                     }, 
                     new go.Binding("text", "text")
-                )
+                ), 
+                {
+                    mouseEnter: (e, node) => displayPorts(node, true),
+                    mouseLeave: (e, node) => displayPorts(node, false),
+                }
             );
             let emojiTemplate = $(
                 go.Node, "Auto", 
@@ -230,6 +238,14 @@
                 return "Are you sure you want to leave?";
             }
 
+            let displayPorts = (node: any, show: any): void => {
+                node.ports.each((port: any) => {
+                    if(port.portId !== "") {
+                        port.fill = show ? "rgba(0,0,0,.3)" : null;
+                    }
+                });
+            }
+
         },
         methods: {
             addSticker() {
@@ -300,7 +316,7 @@
             },
             showEmojiPicker() {
                 this.emojiPicker === 'hidden' ? this.emojiPicker = 'visible' : this.emojiPicker = 'hidden';
-            }
+            },
         }
     }
 </script>

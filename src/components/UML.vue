@@ -300,6 +300,7 @@
 
             <!-- Add to board stuff -->
             <div class="flex flex-row items-center border borde-gray-300 rounded-lg py-1">
+                <h1>New UML shapes soon 😎</h1>
                 <button 
                     class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="addSticker"
