@@ -157,7 +157,7 @@
                         font: "50px sans-serif"
                         
                     }, 
-                    new go.Binding("text", "key")
+                    new go.Binding("text", "text")
                 )
             );
             let textBoxTemplate = $(
@@ -227,9 +227,10 @@
             document.querySelector('emoji-picker')?.addEventListener('emoji-click', (event) => {
                 // Add emoji to board
                 this.$options.diagram.model.addNodeData({
-                    key: event.detail.unicode,
+                    key: "",
                     color: "lightblue",
                     category: "emoji",
+                    text: event.detail.unicode
                 });
             });
 
@@ -334,9 +335,12 @@
 </script>
 
 <template>
-    <div class="w-full h-screen" ref="container">
-        <div id="diagram" class="border border-black border-b-0 w-full h-98 bg-white relative">
-        </div>
+    <div class="w-full h-screen absolute" ref="container">
+        
+        <div id="diagram" class="border border-black border-b-0 w-full h-98 bg-white"></div>
+
+        <emoji-picker class="light w-[300px] h-[300px] relative mb-[-300px] bottom-[325px] left-[14%] md:left-[42.5%] z-[1000]" v-show="emojiPicker === 'visible'"></emoji-picker>
+
         <div class="grid grid-cols-1 sm:grid-cols-3 items-center justify-items-center h-2 bg-white">
             <!-- Export section -->
             <div class="justify-self-center sm:justify-self-start border borde-gray-300 rounded-lg py-1 mb-2 sm:mb-0 sm:ml-2">
@@ -377,7 +381,6 @@
                     <v-icon name="bi-emoji-smile" scale="1.5"></v-icon>
                     <span id="addEmojiLabel" hidden>Add Emoji</span>
                 </button>
-                <emoji-picker class="light w-[300px] h-[300px]" v-show="emojiPicker === 'visible'"></emoji-picker>
                 <button 
                     class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="addText"
