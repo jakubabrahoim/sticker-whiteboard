@@ -339,9 +339,11 @@
         
         <div id="diagram" class="border border-black border-b-0 w-full h-screen bg-white"></div>
 
-        <emoji-picker class="light w-[300px] h-[300px] relative mb-[-300px] bottom-[375px] left-[14%] md:left-[42.5%] z-[1000]" v-show="emojiPicker === 'visible'"></emoji-picker>
+        <div class="flex flex-row justify-center relative mb-[-300px] bottom-[375px] z-[1000]" v-show="emojiPicker === 'visible'">
+            <emoji-picker class="light w-[300px] h-[300px]"></emoji-picker>
+        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 items-center justify-items-center relative bottom-[75px] z-[1000] h-2 bg-transparent">
+        <div class="grid grid-cols-1 sm:grid-cols-3 items-center justify-items-center relative bottom-[175px] sm:bottom-[75px] z-[1000] h-2 bg-transparent">
             <!-- Export section -->
             <div class="justify-self-center sm:justify-self-start border border-gray-500 rounded-lg py-1 mb-2 sm:mb-0 sm:ml-2 bg-white">
                 <button 
