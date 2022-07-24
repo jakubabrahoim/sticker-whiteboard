@@ -250,12 +250,10 @@
 
             // Zoom with I/O keys
             document.addEventListener('keydown', (event: any) => {
-                if(event.keyCode == 73) {
-                    
+                if(event.keyCode == 73) {      
                     this.zoom("in");
                 }
-                if(event.keyCode == 79) {
-                    
+                if(event.keyCode == 79) {    
                     this.zoom("out");
                 }
             });
@@ -330,6 +328,14 @@
             showEmojiPicker() {
                 this.emojiPicker === 'hidden' ? this.emojiPicker = 'visible' : this.emojiPicker = 'hidden';
             },
+            returnHome() {
+                this.$router.push('/');
+            }
+        },
+        beforeRouteLeave(to, from, next) {
+            let dialog = window.confirm("Are you sure you want to return home?");
+            if(!dialog) return next(false);
+            else next();
         }
     }
 </script>
@@ -345,7 +351,16 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-3 items-center justify-items-center relative bottom-[175px] sm:bottom-[75px] z-[1000] h-2 bg-transparent">
             <!-- Export section -->
-            <div class="justify-self-center sm:justify-self-start border border-gray-500 rounded-lg py-1 mb-2 sm:mb-0 sm:ml-2 bg-white">
+            <div class="justify-self-center sm:justify-self-start border border-gray-500 hover:border-purple-500 transition hover:ease-in duration-150 rounded-lg py-1 mb-2 sm:mb-0 sm:ml-2 bg-white">
+                <button 
+                    class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
+                    @click="returnHome"
+                    aria-labelledby="returnHomeLabel"
+                >
+                    <v-icon name="bi-arrow-return-left" scale="1.5"></v-icon>
+                    <span id="returnHomeLabel" hidden>Return home</span>
+                </button>
+                
                 <button 
                     class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="saveWhiteboardJSON"
@@ -366,7 +381,7 @@
             </div>
 
             <!-- Add to board stuff -->
-            <div class="flex flex-row items-center border border-gray-500 rounded-lg py-1 bg-white">
+            <div class="flex flex-row items-center border border-gray-500 hover:border-purple-500 transition hover:ease-in duration-150 rounded-lg py-1 bg-white">
                 <button 
                     class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="addSticker"
@@ -394,7 +409,7 @@
             </div>
             
             <!-- Zoom section -->
-            <div class="justify-self-center sm:justify-self-end flex flex-row items-center border border-gray-500 rounded-lg py-1 mt-2 sm:my-0 sm:mr-2 bg-white">
+            <div class="justify-self-center sm:justify-self-end flex flex-row items-center border border-gray-500 hover:border-purple-500 transition hover:ease-in duration-150 rounded-lg py-1 mt-2 sm:my-0 sm:mr-2 bg-white">
                 <button
                     class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
                     @click="zoom('out')"
