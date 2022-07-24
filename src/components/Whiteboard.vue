@@ -337,13 +337,13 @@
 <template>
     <div class="w-full h-screen absolute" ref="container">
         
-        <div id="diagram" class="border border-black border-b-0 w-full h-98 bg-white"></div>
+        <div id="diagram" class="border border-black border-b-0 w-full h-screen bg-white"></div>
 
-        <emoji-picker class="light w-[300px] h-[300px] relative mb-[-300px] bottom-[325px] left-[14%] md:left-[42.5%] z-[1000]" v-show="emojiPicker === 'visible'"></emoji-picker>
+        <emoji-picker class="light w-[300px] h-[300px] relative mb-[-300px] bottom-[375px] left-[14%] md:left-[42.5%] z-[1000]" v-show="emojiPicker === 'visible'"></emoji-picker>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 items-center justify-items-center h-2 bg-white">
+        <div class="grid grid-cols-1 sm:grid-cols-3 items-center justify-items-center relative bottom-[75px] z-[1000] h-2 bg-transparent">
             <!-- Export section -->
-            <div class="justify-self-center sm:justify-self-start border borde-gray-300 rounded-lg py-1 mb-2 sm:mb-0 sm:ml-2">
+            <div class="justify-self-center sm:justify-self-start border border-gray-500 rounded-lg py-1 mb-2 sm:mb-0 sm:ml-2 bg-white">
                 <button 
                     class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="saveWhiteboardJSON"
@@ -364,7 +364,7 @@
             </div>
 
             <!-- Add to board stuff -->
-            <div class="flex flex-row items-center border borde-gray-300 rounded-lg py-1">
+            <div class="flex flex-row items-center border border-gray-500 rounded-lg py-1 bg-white">
                 <button 
                     class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 h-10 w-10 rounded-lg px-1 py-1 mx-2 justify-self-start"
                     @click="addSticker"
@@ -392,7 +392,7 @@
             </div>
             
             <!-- Zoom section -->
-            <div class="justify-self-center sm:justify-self-end flex flex-row items-center border borde-gray-300 rounded-lg py-1 mt-2 sm:my-0 sm:mr-2">
+            <div class="justify-self-center sm:justify-self-end flex flex-row items-center border border-gray-500 rounded-lg py-1 mt-2 sm:my-0 sm:mr-2 bg-white">
                 <button
                     class="text-gray-500 hover:text-purple-500 hover:bg-purple-100 rounded-lg px-1 py-1 mx-2"
                     @click="zoom('out')"
